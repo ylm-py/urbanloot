@@ -1,8 +1,41 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/urbanloot/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/urbanloot/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/urbanloot",
+  "projects": {
+    "api-gateway": {
+      "type": "application",
+      "root": "apps/api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+      }
+    },
+    "authentication": {
+      "type": "application",
+      "root": "apps/authentication",
+      "entryFile": "main",
+      "sourceRoot": "apps/authentication/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/authentication/tsconfig.app.json"
+      }
+    },
+    "urbanloot": {
+      "type": "application",
+      "root": "apps/urbanloot",
+      "entryFile": "main",
+      "sourceRoot": "apps/urbanloot/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/urbanloot/tsconfig.app.json"
+      }
+    }
   }
 }
