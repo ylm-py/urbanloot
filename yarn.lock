@@ -1029,7 +1029,7 @@
 
 "@nestjs/config@^4.0.2":
   version "4.0.2"
-  resolved "https://registry.npmjs.org/@nestjs/config/-/config-4.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/config/-/config-4.0.2.tgz#a2777a1fd2d0d594bab3953f50fbca95c14cce52"
   integrity sha512-McMW6EXtpc8+CwTUwFdg6h7dYcBUpH5iUILCclAsa+MbCEvC9ZKu4dCHRlJqALuhjLw97pbQu62l4+wRwGeZqA==
   dependencies:
     dotenv "16.4.7"
@@ -1100,7 +1100,7 @@
 
 "@nestjs/typeorm@^11.0.0":
   version "11.0.0"
-  resolved "https://registry.npmjs.org/@nestjs/typeorm/-/typeorm-11.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-11.0.0.tgz#b0f45d6902396db89e0ac1f4e738c2ff3407b794"
   integrity sha512-SOeUQl70Lb2OfhGkvnh4KXWlsd+zA08RuuQgT7kKbzivngxzSo1Oc7Usu5VxCxACQC9wc2l9esOHILSJeK7rJA==
 
 "@noble/hashes@^1.1.5":
@@ -2243,6 +2243,11 @@ bcrypt@^6.0.0:
   dependencies:
     node-addon-api "^8.3.0"
     node-gyp-build "^4.8.4"
+
+bcryptjs@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-3.0.2.tgz#caadcca1afefe372ed6e20f86db8e8546361c1ca"
+  integrity sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog==
 
 bignumber.js@9.0.0:
   version "9.0.0"
@@ -4378,6 +4383,22 @@ jsonwebtoken@9.0.2, jsonwebtoken@^9.0.0:
     ms "^2.1.1"
     semver "^7.5.4"
 
+jsonwebtoken@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz#65ff91f4abef1784697d40952bb1998c504caaf3"
+  integrity sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==
+  dependencies:
+    jws "^3.2.2"
+    lodash.includes "^4.3.0"
+    lodash.isboolean "^3.0.3"
+    lodash.isinteger "^4.0.4"
+    lodash.isnumber "^3.0.3"
+    lodash.isplainobject "^4.0.6"
+    lodash.isstring "^4.0.1"
+    lodash.once "^4.0.0"
+    ms "^2.1.1"
+    semver "^7.5.4"
+
 jwa@^1.4.1:
   version "1.4.2"
   resolved "https://registry.npmjs.org/jwa/-/jwa-1.4.2.tgz"
@@ -5142,7 +5163,7 @@ pg-types@2.2.0:
 
 pg@^8.16.0:
   version "8.16.0"
-  resolved "https://registry.npmjs.org/pg/-/pg-8.16.0.tgz"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-8.16.0.tgz#40b08eedb5eb1834252cf3e3629503e32e6c6c04"
   integrity sha512-7SKfdvP8CTNXjMUzfcVTaI+TDzBEeaUnVwiVGZQD1Hh33Kpev7liQba9uLd4CfN8r9mCVsD0JIpq03+Unpz+kg==
   dependencies:
     pg-connection-string "^2.9.0"
@@ -6126,7 +6147,7 @@ typedarray@^0.0.6:
 
 typeorm@^0.3.24:
   version "0.3.24"
-  resolved "https://registry.npmjs.org/typeorm/-/typeorm-0.3.24.tgz"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.3.24.tgz#e05ab51d60036d2beb35f942783c37f2af02b4ef"
   integrity sha512-4IrHG7A0tY8l5gEGXfW56VOMfUVWEkWlH/h5wmcyZ+V8oCiLj7iTPp0lEjMEZVrxEkGSdP9ErgTKHKXQApl/oA==
   dependencies:
     "@sqltools/formatter" "^1.2.5"
@@ -6316,6 +6337,7 @@ word-wrap@^1.2.5:
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
