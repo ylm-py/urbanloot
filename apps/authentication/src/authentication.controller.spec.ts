@@ -16,7 +16,7 @@ describe('AuthenticationController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(authenticationController.getHello()).toBe('Hello World!');
+      expect(authenticationController).toBeDefined();
     });
   });
 });

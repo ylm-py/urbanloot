@@ -17,4 +17,16 @@ export class AuthenticationController {
   login(dto: LoginDto) {
     return this.authService.login(dto.email, dto.password);
   }
+  @MessagePattern({ cmd: 'auth_refresh' })
+  refresh(dto: { userId: number; refreshToken: string }) {
+    return this.authService.refreshTokens(dto.userId, dto.refreshToken);
+  }
+  @MessagePattern({ cmd: 'auth_logout' })
+  logout(dto: { userId: number }) {
+    return this.authService.logout(dto.userId);
+  }
+  @MessagePattern({ cmd: 'auth_get_profile' })
+  getProfile(dto: { userId: number }) {
+    return this.authService.getProfile(dto.userId);
+  }
 }
