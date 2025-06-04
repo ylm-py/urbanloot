@@ -2,8 +2,11 @@ import { Controller, Post, Body, Inject, Get } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { RegisterDto } from 'apps/authentication/src/dto/register-dto';
 import { LoginDto } from 'apps/authentication/src/dto/login-dto';
+import { ApiTags } from '@nestjs/swagger';
+
 
 @Controller('auth')
+@ApiTags('api-gateway')
 export class ApiGatewayController {
   constructor(@Inject('AUTH_SERVICE') private readonly authClient: ClientProxy) {}
 

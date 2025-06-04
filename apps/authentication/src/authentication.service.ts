@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UnauthorizedException } from '@nestjs/common';
+import { RegisterDto } from './dto/register-dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -45,15 +46,20 @@ export class AuthenticationService {
     await this.usersRepo.update(userId, { hashedRefreshToken: undefined });
   }
 
-  async register(email: string, password: string) {
-    const existing = await this.usersRepo.findOneBy({ email });
-    if (existing) throw new UnauthorizedException('User already exists');
+  async register(dto: RegisterDto) {
+    try{
+      const existing = await this.usersRepo.findOneBy({ email: dto.email });
+      if (existing) throw new UnauthorizedException('User already exists');
 
-    const hash = await bcrypt.hash(password, 10);
-    const user = this.usersRepo.create({ email, password: hash });
-    await this.usersRepo.save(user);
+      const hash = await bcrypt.hash(dto.password, 10);
+      const user = this.usersRepo.create({ email: dto.email, password: hash });
+      await this.usersRepo.save(user);
 
-    return this.getTokensAndStoreRefresh(user);
+      return this.getTokensAndStoreRefresh(user);
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw new UnauthorizedException('Registration failed: ' + error.message);
+    }
   }
 
   async login(email: string, password: string) {

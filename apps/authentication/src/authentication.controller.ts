@@ -3,14 +3,17 @@ import { MessagePattern } from '@nestjs/microservices';
 import { AuthenticationService } from './authentication.service';
 import { RegisterDto } from './dto/register-dto';
 import { LoginDto } from './dto/login-dto';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('authentication')
 @Controller()
 export class AuthenticationController {
   constructor(private readonly authService: AuthenticationService) {}
 
   @MessagePattern({ cmd: 'auth_register' })
   register(dto: RegisterDto) {
-    return this.authService.register(dto.email, dto.password);
+    return this.authService.register(dto);
   }
 
   @MessagePattern({ cmd: 'auth_login' })
