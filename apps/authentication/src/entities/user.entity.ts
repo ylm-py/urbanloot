@@ -11,8 +11,8 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ nullable: true })
-  hashedRefreshToken?: string;
+  @Column({ nullable: true , type: 'text', default: null})
+  hashedRefreshToken?: string | null;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

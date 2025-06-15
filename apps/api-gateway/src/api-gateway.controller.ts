@@ -1,8 +1,10 @@
-import { Controller, Post, Body, Inject, Get } from '@nestjs/common';
+import { Controller, Post, Body, Inject, Get, UseGuards, Req, OnModuleInit, Ip } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { RegisterDto } from 'apps/authentication/src/dto/register-dto';
 import { LoginDto } from 'apps/authentication/src/dto/login-dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+
 
 
 @Controller('auth')
@@ -24,11 +26,17 @@ export class ApiGatewayController {
     return this.authClient.send({ cmd: 'auth_refresh' }, dto);
   }
   @Post('logout')
-  logout(@Body() dto: { userId: number }) {
-    return this.authClient.send({ cmd: 'auth_logout' }, dto);
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
+  logout(@Req() req: any) {
+    const userId = req.user.sub;
+    return this.authClient.send({ cmd: 'auth_logout' }, { userId });
   }
   @Get('profile')
-  getProfile(@Body() dto: { userId: number }) {
-    return this.authClient.send({ cmd: 'auth_get_profile' }, dto);
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
+  getProfile(@Req() req: any) {
+    const userId = req.user.sub;
+    return this.authClient.send({ cmd: 'auth_get_profile' }, { userId });
   }
 }

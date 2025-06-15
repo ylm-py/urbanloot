@@ -1,42 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { UserProfile } from './entities/user-profile.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(UserProfile)
+    private readonly userRepository: Repository<UserProfile>,
   ) {}
 
-  async create(dto: CreateUserDto): Promise<User> {
-    const user = this.userRepository.create(dto);
+  async createProfile(createUserDto: CreateUserDto): Promise<UserProfile> {
+    const userData = { ...createUserDto, id: createUserDto.id };
+    const user = this.userRepository.create(userData);
     return this.userRepository.save(user);
   }
 
-  async findAll(): Promise<User[]> {
-    return this.userRepository.find(); //TODO: Handle soft-deleted users
-  }
-
-  async findOne(id: string): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) throw new NotFoundException('User not found');
-    return user;
-  }
-
-  async update(id: string, dto: UpdateUserDto): Promise<User> {
-    await this.userRepository.update(id, dto);
-    return this.findOne(id);
-  }
-
-  async softDelete(id: string): Promise<void> {
-    await this.userRepository.softDelete(id);
-  }
-
-  async restore(id: string): Promise<void> {
-    await this.userRepository.restore(id);
+  async updateProfile(UpdateUserDto: UpdateUserDto): Promise<UserProfile> {
+    const user = await this.userRepository.findOneBy({ id: UpdateUserDto.id });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    Object.assign(user, UpdateUserDto);
+    return this.userRepository.save(user);
   }
 }

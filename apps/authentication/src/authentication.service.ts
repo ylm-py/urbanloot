@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
 import { UnauthorizedException } from '@nestjs/common';
 import { RegisterDto } from './dto/register-dto';
 
@@ -43,7 +42,11 @@ export class AuthenticationService {
   }
 
   async logout(userId: number) {
-    await this.usersRepo.update(userId, { hashedRefreshToken: undefined });
+    const result = await this.usersRepo.update(userId, { hashedRefreshToken: null });
+    if (result.affected === 0) {
+      throw new UnauthorizedException('User not found or already logged out');
+    }
+    return { message: 'User logged out successfully' };
   }
 
   async register(dto: RegisterDto) {
@@ -54,7 +57,10 @@ export class AuthenticationService {
       const hash = await bcrypt.hash(dto.password, 10);
       const user = this.usersRepo.create({ email: dto.email, password: hash });
       await this.usersRepo.save(user);
-
+      // TODO : Handle user profile creation on the users microservice
+      // this.usersService.send({ cmd: 'user_create_profile' }, {
+      //   id: user.id,
+      // });
       return this.getTokensAndStoreRefresh(user);
     } catch (error) {
       console.error('Registration error:', error);
