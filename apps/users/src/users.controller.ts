@@ -13,7 +13,6 @@ export class UserController {
 
   @MessagePattern({ cmd: 'user_create_profile' })
   createProfile(dto: CreateUserDto) {
-    console.log('Called !')
     return this.userService.createProfile(dto);
   }
 }

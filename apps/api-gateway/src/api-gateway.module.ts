@@ -23,7 +23,15 @@ import { ConfigModule } from '@nestjs/config';
           host: '127.0.0.1',
           port: 4001,
         },
-      }
+      },
+      {
+        name: 'USERS_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: '127.0.0.1',
+          port: 4002,
+        },
+      },
     ]),
   ],
   controllers: [ApiGatewayController],

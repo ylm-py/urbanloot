@@ -10,7 +10,9 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 @Controller('auth')
 @ApiTags('api-gateway')
 export class ApiGatewayController {
-  constructor(@Inject('AUTH_SERVICE') private readonly authClient: ClientProxy) {}
+  constructor(
+    @Inject('AUTH_SERVICE') private readonly authClient: ClientProxy,
+  ) {}
 
   @Post('register')
   register(@Body() dto: RegisterDto) {
