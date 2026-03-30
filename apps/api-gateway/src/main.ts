@@ -3,6 +3,7 @@ import { ApiGatewayModule } from './api-gateway.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { VpnDetectionGuard } from './guards/vpn-detection.guard';
 import { RpcExceptionFilter } from './filters/rpc-exception.filter';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiGatewayModule);
@@ -26,6 +27,7 @@ async function bootstrap() {
 
   app.useGlobalGuards(new VpnDetectionGuard());
   app.useGlobalFilters(new RpcExceptionFilter());
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   await app.listen(3000);
   console.log('Gateway running at http://localhost:3000/api');
